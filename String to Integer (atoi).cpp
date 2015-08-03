@@ -1,4 +1,4 @@
-//solution1:Handle overflow before add new char; ans is "int",
+//solution1:Handle overflow before adding new char; ans is "int",
 class Solution {
 public:
     int myAtoi(string str) {
@@ -27,7 +27,7 @@ public:
     }
 };
 
-//solution2:  so handle overflow after add new char; ans is "long long"
+//solution2:  Handle overflow after adding new char; ans is "long long"
 class Solution {
 public:
     int myAtoi(string str) {
