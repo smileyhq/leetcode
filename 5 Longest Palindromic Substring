@@ -1,0 +1,54 @@
+class Solution {
+public:
+	//1-d DP:
+	//dp[i][j] depends on dp[i+1][j-1]
+	//use 2-d DP, update from down to up, from left to right
+	//use 1-d DP, update from down to up, from right to left
+	//time : O(n^2)
+	//space: O(n)
+	string longestPalindrome(string s) {
+		int N = s.size();
+		if(N < 2) return s;
+		int maxLen = 1, maxBegin = 0;
+		bool dp[N];
+		memset(dp, false, N*sizeof(bool));
+		dp[N-2] = true;
+		if(s[N-2] == s[N-1])  {
+			dp[N-1] = true;
+			maxLen = 2;
+			maxBegin = N-2;
+		}
+		for(int i = N-3; i >= 0; i--) {
+			for(int j = N-1; j >= i+2; j--) {
+				if(dp[j-1] && s[i] == s[j]) {
+					dp[j] = true;
+					if(j - i + 1 > maxLen) {
+						maxLen = j - i + 1;
+						maxBegin = i;
+					}
+				}
+				else 
+					dp[j] = false;   
+			}
+			dp[i] = true;
+			if(s[i] == s[i+1]) {
+				dp[i+1] = true;
+				if(2 > maxLen) {
+					maxLen = 2;
+					maxBegin = i;
+				}
+			}
+			else
+				dp[i+1] = false;   
+		}
+		return s.substr(maxBegin, maxLen);
+	}
+
+	//manacher's algorithm
+	//time: O(n)
+	string longestPalindrome2(string s) {
+
+	}
+
+	//test case : "aaabaaaa"
+};
